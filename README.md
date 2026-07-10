@@ -37,14 +37,22 @@ Adjust `CORS_ORIGINS` for the browser origin and `DATABASE_URL` when database wo
 
 ## Current implementation status
 
-Implemented: workspace tooling; strict TypeScript; ESLint/Prettier; validated API environment; Helmet, CORS allowlist, request IDs, normalized errors, JSON request limits, and graceful API shutdown; a responsive storefront frame; semantic light/dark tokens; theme persistence with initial-page anti-flash handling; English/Arabic message architecture with document `lang`/`dir` changes; accessibility foundations; and original inline SVG footwear icons.
+Implemented: workspace tooling; strict TypeScript; ESLint/Prettier; validated API environment; Helmet, CORS allowlist, request IDs, normalized errors, JSON request limits, and graceful API shutdown; semantic light/dark tokens; theme persistence with initial-page anti-flash handling; English/Arabic message architecture with document `lang`/`dir` changes; accessibility foundations; and original inline SVG footwear icons.
 
-The main content area is intentionally empty. There is no product catalogue, account system, checkout, database schema, or production deployment yet.
+The storefront now includes a complete bilingual editorial homepage: announcement and responsive navigation, a premium Oxford hero, category presentations, an anatomy diagram, typed featured-product data, materials and construction storytelling, journal teasers, an honest presentation-only newsletter form, theme selection, and a complete footer. The visual direction is an atelier rather than a generic storefront: warm parchment, espresso leather, stitched dividers, restrained brass, shoe-last forms, and catalog-like specification labels.
+
+## Hero animation and media strategy
+
+`AtelierLight` is a dependency-free WebGL canvas that is code-split and loaded only for the homepage hero. It remains behind content with `pointer-events: none`, caps DPR at 1.5, observes its own hero container, pauses when the tab is hidden, follows only fine-pointer movement inside that hero, and disposes its frame, observers, listeners, GL resources, and canvas at teardown. Reduced-motion and touch-first environments keep a static CSS light treatment; a missing WebGL context also leaves the fallback and all content intact.
+
+Product visuals currently use intentionally designed inline SVG silhouettes and CSS leather-grain treatment—there are no hotlinked or broken images. Replace them later by adding optimized local assets under `apps/storefront/src/assets/products/`, preserving the product image aspect ratio and descriptive alt text in the typed product data.
+
+Current limitations: navigation and newsletter signup are presentation-only, products do not yet have detail routes, and no catalogue or database data is connected.
 
 ## Planned milestones
 
 1. PostgreSQL migrations, connection pool, repositories, and product catalogue API.
-2. Catalogue, product-detail, search, filtering, and localized content.
+2. Product-detail routes, local art direction, and catalogue browsing.
 3. Bag, inventory-aware checkout integration, authentication, and order management.
 4. Operational testing, observability, performance auditing, and deployment hardening.
 
